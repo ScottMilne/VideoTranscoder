@@ -12,7 +12,7 @@
         <h3 class="text-center">
             Upload Video
         </h3>
-        <form method="post" action="{{ route('upload', ['filetype' => 'testing']) }}" enctype="multipart/form-data">
+        <form id="convertForm" method="post" action="" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="video-title">Title</label>
                 <input type="text" class="form-control" name="title" placeholder="Enter video title">
@@ -34,13 +34,14 @@
                 @endif
             </div>
 
+
+
             <!--Filetype Dropdown-->
             <div id="formatDropdown" class="dropdown mb-3">
-                Convert to: 
+                Convert to:
                 <button id="formatBtn" class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
-                    Select Format
-                </button>
+                    MP4</button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <a class="dropdown-item" href="#">MP4</a>
                     <a class="dropdown-item" href="#">FLV</a>
@@ -52,13 +53,7 @@
                     <a class="dropdown-item" href="#">MPEG-2</a>
                 </div>
             </div>
-            <script>
-                $(document).ready(function() {
-                    $(".dropdown-menu a").click(function() {
-                        $("#formatBtn:first-child").html($(this).text());
-                    });
-                });
-            </script>
+
 
             <div class="form-group">
                 <input type="submit" class="btn btn-primary">
@@ -67,7 +62,25 @@
             {{ csrf_field() }}
         </form>
 
+        <script>
+            $(document).ready(function() {
+                //setting form action
+                var form = document.getElementById('convertForm');
+                form.action = '/upload/' + "MP4";
 
+                //On filetype change
+                $(".dropdown-menu a").click(function() {
+                    //change dropdown text
+                    document.getElementById("formatBtn")
+                    $("#formatBtn:first-child").html($(this).text());
+                    var convertButtonText = $(this).text();
+                    console.log(convertButtonText);
+
+                    //updating form action
+                    form.action = '/upload/' + convertButtonText;
+                });
+            });
+        </script>
 
 
 
