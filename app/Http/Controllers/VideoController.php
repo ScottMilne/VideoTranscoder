@@ -36,15 +36,10 @@ class VideoController extends Controller
      * @param StoreVideoRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(StoreVideoRequest $request)
+    public function store(StoreVideoRequest $request, $filetype)
     {
-
-        
-
         $path = str_random(4) . '.' . $request->video->getClientOriginalExtension();
         $request->video->storeAs('/', $path);
-
-        //dd("saved file");
 
         $video = Video::create([
             'disk'          => 'public',
@@ -53,7 +48,7 @@ class VideoController extends Controller
             'title'         => $request->title,
         ]);
 
-        ConvertVideoForStreaming::dispatch($video);
+        ConvertVideoForStreaming::dispatch($video, $filetype);
 
         return redirect('/uploader')
             ->with(

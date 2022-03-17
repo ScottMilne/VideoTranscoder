@@ -66,7 +66,7 @@
             $(document).ready(function() {
                 //setting form action
                 var form = document.getElementById('convertForm');
-                form.action = '/upload/' + "MP4";
+                form.action = '/upload/filetype/' + "MP4";
 
                 //On filetype change
                 $(".dropdown-menu a").click(function() {
@@ -77,7 +77,7 @@
                     console.log(convertButtonText);
 
                     //updating form action
-                    form.action = '/upload/' + convertButtonText;
+                    form.action = '/upload/filetype/' + convertButtonText;
                 });
             });
         </script>
