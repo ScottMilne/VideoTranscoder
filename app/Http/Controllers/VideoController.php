@@ -42,14 +42,14 @@ class VideoController extends Controller
      */
     public function store(StoreVideoRequest $request, $filetype)
     {
-        $path = str_random(4) . '.' . $request->video->getClientOriginalExtension();
+        $path = str_random(6) . '.' . $request->video->getClientOriginalExtension();
         $request->video->storeAs('/', $path);
 
         $video = Video::create([
             'disk'          => 'public',
             'original_name' => $request->video->getClientOriginalName(),
             'path'          => $path,
-            'title'         => $request->title,
+            'title'         => $request->video->getClientOriginalName().' to '.$filetype,
             'created_by'    => Auth::user()->id,
         ]);
 

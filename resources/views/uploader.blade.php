@@ -14,13 +14,7 @@
         </h3>
         <form id="convertForm" method="post" action="" enctype="multipart/form-data">
             <div class="form-group">
-                <label for="video-title">Title</label>
-                <input type="text" class="form-control" name="title" placeholder="Enter video title">
-                @if ($errors->has('title'))
-                    <span class="text-danger">
-                        {{ $errors->first('title') }}
-                    </span>
-                @endif
+                <input class="d-none" name="title" value=".">
             </div>
 
             <div class="form-group">
