@@ -15,6 +15,7 @@ class CreateVideosTable extends Migration
     {
         Schema::create('videos', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('created_by');
             $table->string('title');
             $table->string('original_name');
             $table->string('disk');

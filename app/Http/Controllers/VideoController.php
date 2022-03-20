@@ -5,10 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreVideoRequest;
 use App\Jobs\ConvertVideoForStreaming;
 use App\Video;
-use Illuminate\Http\Request;
-use Pbmedia\LaravelFFMpeg\FFMpegFacade as FFMpeg;
-use FFMpeg\Coordinate\Dimension;
-use FFMpeg\Format\Video\WebM;
+use Illuminate\Support\Facades\Auth;
 
 class VideoController extends Controller
 {
@@ -18,9 +15,16 @@ class VideoController extends Controller
      */
     public function index()
     {
-        $videos = Video::orderBy('created_at', 'DESC')->get();
+        $userID=Auth::user()->id;
+        
+        $videos = Video::where(
+            function($query) use ($userID){
+                $query->where('created_by', '=', $userID);
+            }
+        )->get();
+
         return view('videos')->with('videos', $videos);
-    }
+    } 
 
     /**
      * Return uploader form view for uploading videos
@@ -46,6 +50,7 @@ class VideoController extends Controller
             'original_name' => $request->video->getClientOriginalName(),
             'path'          => $path,
             'title'         => $request->title,
+            'created_by'    => Auth::user()->id,
         ]);
 
         ConvertVideoForStreaming::dispatch($video, $filetype);
