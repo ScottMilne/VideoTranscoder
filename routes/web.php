@@ -15,6 +15,8 @@
 Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/', 'VideoController@index');
+    
+    Route::get('/destroy/{id}', 'VideoController@destroy')->name('destroy');
 
     Route::get('/uploader', 'VideoController@uploader')->name('uploader');
 

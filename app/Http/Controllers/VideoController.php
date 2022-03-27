@@ -15,16 +15,33 @@ class VideoController extends Controller
      */
     public function index()
     {
-        $userID=Auth::user()->id;
-        
+        $userID = Auth::user()->id;
+
         $videos = Video::where(
-            function($query) use ($userID){
+            function ($query) use ($userID) {
                 $query->where('created_by', '=', $userID);
             }
         )->get();
 
         return view('videos')->with('videos', $videos);
-    } 
+    }
+
+    /**
+     * Handles deleting video
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function destroy($id)
+    {
+
+        $video = Video::find($id);
+        $video->delete();
+
+        return redirect('/')
+            ->with(
+                'message',
+                $video->title . ' has been deleted'
+            );
+    }
 
     /**
      * Return uploader form view for uploading videos
@@ -49,7 +66,7 @@ class VideoController extends Controller
             'disk'          => 'public',
             'original_name' => $request->video->getClientOriginalName(),
             'path'          => $path,
-            'title'         => $request->video->getClientOriginalName().' to '.$filetype,
+            'title'         => $request->video->getClientOriginalName() . ' to ' . $filetype,
             'created_by'    => Auth::user()->id,
         ]);
 
