@@ -22,7 +22,7 @@ class VideoController extends Controller
             function ($query) use ($userID) {
                 $query->where('created_by', '=', $userID);
             }
-        )->get();
+        )->orderByDesc('id')->get();
 
         return view('videos')->with('videos', $videos);
     }
