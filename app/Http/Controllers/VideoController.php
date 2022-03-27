@@ -6,6 +6,7 @@ use App\Http\Requests\StoreVideoRequest;
 use App\Jobs\ConvertVideoForStreaming;
 use App\Video;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class VideoController extends Controller
 {
@@ -41,6 +42,16 @@ class VideoController extends Controller
                 'message',
                 $video->title . ' has been deleted'
             );
+    }
+
+
+    /**
+     * Returns video for download 
+     */
+    public function download($id)
+    {
+        $video = Video::find($id);
+        return Storage::download($video->stream_path);
     }
 
     /**

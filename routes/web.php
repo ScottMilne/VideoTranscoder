@@ -18,6 +18,8 @@ Route::group(['middleware' => ['auth']], function () {
     
     Route::get('/destroy/{id}', 'VideoController@destroy')->name('destroy');
 
+    Route::get('/download/{id}', 'VideoController@download')->name('download');
+
     Route::get('/uploader', 'VideoController@uploader')->name('uploader');
 
     Route::post('/upload/filetype/{filetype}', 'VideoController@store')->name('upload');
