@@ -23,9 +23,10 @@
                         <h4>
                             {{ $video->title }}
                         </h4>
-                        <Button class="btn btn-outline-primary">Download</Button>
-                        <a href="{{ route('destroy', ['id' => $video->id]) }}" class="btn btn-outline-danger">Delete
-                            {{ $video->id }}</a>
+                        <a href="{{ route('download', ['id' => $video->id]) }}"
+                            class="btn btn-outline-primary mb-2">Download</a>
+                        <a href="{{ route('destroy', ['id' => $video->id]) }}"
+                            class="btn btn-outline-danger mb-2">Delete</a>
                     </div>
                     @if ($video->processed)
                         <video src="/storage/{{ $video->stream_path }}" class="w-100" controls></video>
