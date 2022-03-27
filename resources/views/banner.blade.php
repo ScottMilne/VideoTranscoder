@@ -7,7 +7,6 @@
 <style>
     .banner {
         min-width: 300px;
-        position: fixed;
         bottom: 10px;
         right: 20vw;
         width: 60%;
