@@ -86,7 +86,7 @@ class VideoController extends Controller
         return redirect('/uploader')
             ->with(
                 'message',
-                'Your video will be available shortly after it has been processed'
+                'Video is now being processed. Video will be available on the View Videos page'
             );
     }
 }
