@@ -6,6 +6,7 @@
 
 <style>
     .banner {
+        position:fixed;
         min-width: 300px;
         bottom: 10px;
         right: 20vw;
