@@ -39,21 +39,17 @@ class ConvertVideoForStreaming implements ShouldQueue
         $filetype = '.'.$this->filetype;
         $converted_name = preg_replace('/\\.[^.\\s]{3,4}$/', '', $this->video->path) . $filetype;
 
-        // open the uploaded video from the right disk...
+        // open the uploaded video from the disk
         FFMpeg::fromDisk($this->video->disk)
             ->open($this->video->path)
-
-            // call the 'export' method...
             ->export()
 
-            // tell the MediaExporter to which disk and in which format we want to export...
+            // tell the MediaExporter to which disk and in which format to export
             ->toDisk('public')
-            ->inFormat(new WebM())
-
-            // call the 'save' method with a filename...
+            ->inFormat((new WebM())-> setKiloBitrate(4000))
             ->save($converted_name);
 
-        // update the database so we know the convertion is done!
+        // update the database
         $this->video->update([
             'converted_for_streaming_at' => Carbon::now(),
             'processed' => true,
