@@ -32,7 +32,7 @@
                         <video src="/storage/{{ $video->stream_path }}" class="w-100" controls></video>
                     @else
                         <div class="alert alert-info w-100">
-                            Video is currently being processed and will be available shortly
+                            Video processing and will be available shortly, try refreshing the page
                         </div>
                     @endif
                 </div>
