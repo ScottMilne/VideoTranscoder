@@ -39,7 +39,7 @@
 
 This project is a video transcoding website which uses FFmpeg along with Laravel and the Laravel Queue package to convert video files uploaded by the user.
 
-
+<img src="imgs/Demo.gif" alt="Demo">
 
 ### Built With
 
